@@ -6,14 +6,12 @@ import cv2
 import numpy as np
 import mood_detector
 
-
 app = Flask(__name__)
 
 @app.route('/api/detect-mood', methods=['POST'])
 def detect_mood():
     try:
         image_data = request.json['image']
-        # Debug print to check if image data is received correctly
         print("Received image data")
         
         image_bytes = base64.b64decode(image_data.split(",")[1])
@@ -26,6 +24,4 @@ def detect_mood():
         print(f"Error in detect_mood: {e}")
         return jsonify({'mood': 'Mood detection failed.'}), 500
 
-
-if __name__ == '__main__':
-    app.run(port=5000)
+# Tidak ada app.run() karena Railway pakai Gunicorn
